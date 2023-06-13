@@ -6,6 +6,7 @@ let secrets = {}
 try {
     secrets = require('../secret.js')
 } catch (error) {
+    console.log(error)
     console.log('no secret json, on github action')
 }
 
