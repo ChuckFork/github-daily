@@ -14,7 +14,7 @@ const getTrending = async () => {
     let res = []
 
     try {
-        await driver.get('https://github.com/trending')
+        await driver.get('https://github.com/trending/c%23?since=daily')
         await driver.wait(until.elementLocated(By.css('article.Box-row')), 80000);
 
         const articles = await driver.findElements(By.css('article.Box-row'))
@@ -32,7 +32,7 @@ const getTrending = async () => {
                 console.log("Desc Error: ", e)
             }
 
-            let programmingLanguage = "c#"
+            let programmingLanguage = ""
             try {
                 programmingLanguage = await article.findElement(By.css("div span span[itemprop=programmingLanguage]")).getText()
             } catch (e) {
