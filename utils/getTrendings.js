@@ -32,7 +32,7 @@ const getTrending = async () => {
                 console.log("Desc Error: ", e)
             }
 
-            let programmingLanguage = ""
+            let programmingLanguage = "c#"
             try {
                 programmingLanguage = await article.findElement(By.css("div span span[itemprop=programmingLanguage]")).getText()
             } catch (e) {
