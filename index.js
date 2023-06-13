@@ -19,7 +19,7 @@ const run = async (date) => {
 
     console.log(contents)
     const res = await issue.open({
-        owner: 'skipmaple',
+        owner: 'chuckfork',
         repo: 'github-daily',
         title: `GitHub Daily Top 10 @${new Date(date).toISOString().slice(0, 10)}`,
         body: contents,
@@ -28,7 +28,7 @@ const run = async (date) => {
     const issueNumber = res.data.number;
 
     await issue.lock({
-        owner: 'skipmaple',
+        owner: 'chuckfork',
         repo: 'github-daily',
         issueNumber,
     });
