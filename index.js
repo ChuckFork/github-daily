@@ -13,7 +13,7 @@ const run = async (date) => {
     let issueNumber;
     for (const [index, { name, comment }] of languages.entries()) {
         const top10Objs = await getTrending(name);
-        issueNumber = await processTrendingRepositories(name, top10Objs, comment, index === 0, issueNumber);
+        issueNumber = await processTrendingRepositories(date, name, top10Objs, comment, index === 0, issueNumber);
     }
 
     await issue.lock({
@@ -23,7 +23,7 @@ const run = async (date) => {
     });
 };
 
-const processTrendingRepositories = async (language, top10Objs, comment, isFirstLanguage, issueNumber) => {
+const processTrendingRepositories = async (date, top10Objs, comment, isFirstLanguage, issueNumber) => {
     let contents = top10Objs.map((obj, i) => {
         let { repo_link, repo, desc, programmingLanguage, starCount, forkCount, todayStarCount } = obj;
 
@@ -40,7 +40,7 @@ ${todayStarCount} | ${starCount} stars | ${forkCount} forks ${programmingLanguag
         const res = await issue.open({
             owner: 'chuckfork',
             repo: 'github-daily',
-            title: `GitHub Daily Top 10 @${new Date(date).toISOString().slice(0, 10)}`,
+            title: `GitHub Daily Top 10 @${date.toISOString().slice(0, 10)}`,
             body: `\n\n**${comment}**\n\n${contents}`,
         });
 
