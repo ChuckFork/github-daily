@@ -3,7 +3,7 @@ const {Builder, By, until} = require('selenium-webdriver')
 
 const Chrome = require('selenium-webdriver/chrome')
 
-const getTrending = async () => {
+const getTrending = async (language) => {
     let options = new Chrome.Options()
     options.setChromeBinaryPath('/usr/bin/google-chrome');
     let driver = await new Builder()
@@ -14,7 +14,9 @@ const getTrending = async () => {
     let res = []
 
     try {
-        await driver.get('https://github.com/trending/c%23?since=daily')
+        const encodedLanguage = encodeURIComponent(language);
+        const url = `https://github.com/trending/${encodedLanguage}?since=daily`;
+        await driver.get(url);
         await driver.wait(until.elementLocated(By.css('article.Box-row')), 80000);
 
         const articles = await driver.findElements(By.css('article.Box-row'))

@@ -49,9 +49,21 @@ const lock = async ({owner, repo, issueNumber}) => {
     console.log('locked')
 }
 
+const comment = async ({ owner, repo, issueNumber, body }) => {
+    console.log('adding comment');
+    await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
+        owner: owner,
+        repo: repo,
+        issue_number: issueNumber,
+        body: body,
+    });
+    console.log('comment added');
+};
+
 module.exports = {
     open,
     lock,
+    comment,
 }
 
 // lock({
