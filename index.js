@@ -13,6 +13,8 @@ const run = async (date) => {
     let issueNumber;
     for (const [index, { name, comment }] of languages.entries()) {
         const top10Objs = await getTrending(name);
+        console.log('Type of top10Objs:', typeof top10Objs);
+        console.log('Content of top10Objs:', top10Objs);    
         issueNumber = await processTrendingRepositories(date, name, top10Objs, comment, index === 0, issueNumber);
     }
 
