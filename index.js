@@ -29,10 +29,10 @@ const processTrendingRepositories = async (date, top10Objs, comment, isFirstLang
 
         return `\n${i + 1}. [**${repo.split('/').join(' / ')}**](${repo_link})
             
-        ${desc ? '__' + desc + '__' : ''}
+    ${desc ? '__' + desc + '__' : ''}
     
-        ${todayStarCount} | ${starCount} stars | ${forkCount} forks ${programmingLanguage ? ('| `' + programmingLanguage + '`') : ''}\n\n`
-            }).join('');
+    ${todayStarCount} | ${starCount} stars | ${forkCount} forks ${programmingLanguage ? ('| `' + programmingLanguage + '`') : ''}\n\n`
+        }).join('');
 
     console.log(contents);
 
