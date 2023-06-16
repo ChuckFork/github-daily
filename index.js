@@ -12,7 +12,7 @@ const run = async (date) => {
 
     let issueNumber;
     for (const [index, { name, comment }] of languages.entries()) {
-        const top10Objs = await getTrending(name);  
+        const top10Objs = await getTrending(name);
         issueNumber = await processTrendingRepositories(date, top10Objs, comment, index === 0, issueNumber);
     }
 
@@ -28,11 +28,11 @@ const processTrendingRepositories = async (date, top10Objs, comment, isFirstLang
         let { repo_link, repo, desc, programmingLanguage, starCount, forkCount, todayStarCount } = obj;
 
         return `\n${i + 1}. [**${repo.split('/').join(' / ')}**](${repo_link})
-        
-${desc ? '__' + desc + '__' : ''}
-
-${todayStarCount} | ${starCount} stars | ${forkCount} forks ${programmingLanguage ? ('| `' + programmingLanguage + '`') : ''}\n\n`;
-    }).join('');
+            
+        ${desc ? '__' + desc + '__' : ''}
+    
+        ${todayStarCount} | ${starCount} stars | ${forkCount} forks ${programmingLanguage ? ('| `' + programmingLanguage + '`') : ''}\n\n`
+            }).join('');
 
     console.log(contents);
 
