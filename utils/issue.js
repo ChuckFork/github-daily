@@ -4,7 +4,17 @@ const { createAppAuth } = require("@octokit/auth-app")
 let secrets = {}
 
 try {
-    secrets = require('../secret.js')
+    if (process.env.NODE_ENV === 'development') {
+        // Development environment-specific code
+        console.log('Running in development mode');
+        secrets = require('../secret.js')
+    } else if (process.env.NODE_ENV === 'production') {
+        // Production environment-specific code
+        console.log('Running in production mode');
+    } else {
+        // Default code for other environments
+        console.log('Running in an unknown environment');
+    }
 } catch (error) {
     console.log(error)
     console.log('no secret json, on github action')
@@ -21,7 +31,7 @@ const octokit = new Octokit({
     },
 })
 
-const open = async ({owner, repo, title, body}) => {
+const open = async ({ owner, repo, title, body }) => {
     try {
         console.log('opening issue')
         const res = await octokit.request('POST /repos/{owner}/{repo}/issues', {
@@ -38,7 +48,7 @@ const open = async ({owner, repo, title, body}) => {
     }
 }
 
-const lock = async ({owner, repo, issueNumber}) => {
+const lock = async ({ owner, repo, issueNumber }) => {
     console.log('locking issue')
     await octokit.request('PUT /repos/{owner}/{repo}/issues/{issue_number}/lock', {
         owner: owner,
