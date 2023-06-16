@@ -15,7 +15,7 @@ const run = async (date) => {
         const top10Objs = await getTrending(name);
         console.log('Type of top10Objs:', typeof top10Objs);
         console.log('Content of top10Objs:', top10Objs);    
-        issueNumber = await processTrendingRepositories(date, name, top10Objs, comment, index === 0, issueNumber);
+        issueNumber = await processTrendingRepositories(date, top10Objs, comment, index === 0, issueNumber);
     }
 
     await issue.lock({
