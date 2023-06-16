@@ -5,7 +5,12 @@ const Chrome = require('selenium-webdriver/chrome')
 
 const getTrending = async (language) => {
     let options = new Chrome.Options()
-    options.setChromeBinaryPath('/usr/bin/google-chrome');
+    if (process.platform === 'win32') {
+        chromeBinaryPath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+      } else {
+        console.log('Platform:', process.platform);
+        chromeBinaryPath = '/usr/bin/google-chrome';
+      }
     let driver = await new Builder()
         .forBrowser('chrome')
         .setChromeOptions(options.addArguments('headless'))
