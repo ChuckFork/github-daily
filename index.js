@@ -6,8 +6,8 @@ const getTrending = require('./utils/getTrendings');
 const run = async (date) => {
     const languages = [
         { name: 'csharp', comment: 'Trending repositories for C#' },
+        { name: 'python', comment: 'Trending repositories for Python' },
         { name: 'javascript', comment: 'Trending repositories for JavaScript' },
-        { name: 'python', comment: 'Trending repositories for Python' }
     ];
 
     let issueNumber;
@@ -41,7 +41,7 @@ ${todayStarCount} | ${starCount} stars | ${forkCount} forks ${programmingLanguag
             owner: 'chuckfork',
             repo: 'github-daily',
             title: `GitHub Daily Top 10 @${date.toISOString().slice(0, 10)}`,
-            body: `\n\n**${comment}**\n\n${contents}`,
+            body: `\n\n# ${comment}\n\n${contents}`,
         });
 
         return res.data.number;
@@ -50,9 +50,9 @@ ${todayStarCount} | ${starCount} stars | ${forkCount} forks ${programmingLanguag
             owner: 'chuckfork',
             repo: 'github-daily',
             issueNumber: issueNumber,
-            body: `\n\n**${comment}**\n\n${contents}`,
+            body: `\n\n# ${comment}\n\n${contents}`,
         });
-        
+
         return issueNumber;
     }
 };

@@ -39,6 +39,9 @@ const open = async ({ owner, repo, title, body }) => {
             repo,
             title,
             body,
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8' // Specify the desired encoding here
+              },
         })
         console.log('opened')
         return res
@@ -54,7 +57,7 @@ const lock = async ({ owner, repo, issueNumber }) => {
         owner: owner,
         repo: repo,
         issue_number: issueNumber,
-        lock_reason: 'resolved'
+        lock_reason: 'resolved',
     })
     console.log('locked')
 }
@@ -65,7 +68,10 @@ const comment = async ({ owner, repo, issueNumber, body }) => {
         owner: owner,
         repo: repo,
         issue_number: issueNumber,
-        body: body,
+        body: body,   
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8' // Specify the desired encoding here
+          },
     });
     console.log('comment added');
 };
